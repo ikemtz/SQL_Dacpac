@@ -20,7 +20,7 @@ RUN /opt/mssql/bin/sqlservr & sleep 20 \
 FROM mcr.microsoft.com/mssql/server
 LABEL author="@IkeMtz"
 ENV ACCEPT_EULA=Y
-ENV SA_PASSWORD=YOUR_PASSWORD
+ENV SA_PASSWORD=YOUR_DESIRED_PASSWORD
 EXPOSE 1433
 COPY --from=sql-temp /var/opt/mssql/data/*.ldf /var/opt/mssql/data/
 COPY --from=sql-temp /var/opt/mssql/data/*.mdf /var/opt/mssql/data/
