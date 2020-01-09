@@ -4,8 +4,7 @@ LABEL maintainer="Isaac Martinez"
 
 # apt-get and system utilities
 RUN apt-get update && apt-get install -y \
-	curl apt-transport-https debconf-utils \
-    && rm -rf /var/lib/apt/lists/*
+    curl apt-transport-https debconf-utils 
 
 
 # install SQL Server drivers and tools
