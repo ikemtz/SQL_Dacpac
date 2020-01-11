@@ -33,6 +33,7 @@ RUN unzip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip -d /opt/mssql-tools/bin
 RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin/sqlpackage"' >> ~/.bashrc 
 RUN chmod a+x /opt/mssql-tools/bin/sqlpackage/sqlpackage
 RUN /bin/bash -c "source ~/.bashrc"
+ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage
 
 VOLUME /devvol
 WORKDIR /devvol
