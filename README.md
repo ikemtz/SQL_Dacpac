@@ -12,7 +12,7 @@ ENV SA_PASSWORD=YOUR_DESIRED_PASSWORD \
 
 COPY /$NEW_DB_NAME.dacpac /dacpac/db.dacpac
 RUN /opt/mssql/bin/sqlservr & sleep 20 \
-    && $sqlpackage /Action:Publish /TargetServerName:localhost /TargetUser:SA /TargetPassword:$SA_PASSWORD /SourceFile:/dacpac/db.dacpac /TargetDatabaseName:$NEW_DB_NAME /p:BlockOnPossibleDataLoss=false \
+    && sqlpackage /Action:Publish /TargetServerName:localhost /TargetUser:SA /TargetPassword:$SA_PASSWORD /SourceFile:/dacpac/db.dacpac /TargetDatabaseName:$NEW_DB_NAME /p:BlockOnPossibleDataLoss=false \
     && sleep 20 \
     && pkill sqlservr && sleep 10 \
     && rm -rf /dacpac
