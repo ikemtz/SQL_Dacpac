@@ -33,7 +33,7 @@ RUN sudo unzip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip -d /opt/mssql-tool
 
 RUN sudo chmod a+x /opt/mssql-tools/bin/sqlpackage/sqlpackage
 ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage
-ENV PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools/bin/sqlpackage
+ENV PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools/bin/sqlpackage:/opt/mssql/bin
 
 VOLUME /devvol
 WORKDIR /devvol
