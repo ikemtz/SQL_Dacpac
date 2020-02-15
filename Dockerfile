@@ -1,7 +1,6 @@
 FROM mcr.microsoft.com/mssql/server:latest
 LABEL maintainer="Isaac Martinez"
 
-
 USER root
 
 RUN apt-get update && apt-get install -y sudo && \
@@ -24,6 +23,7 @@ RUN sudo ACCEPT_EULA=Y apt-get install -fy curl \
     unzip
 
 RUN sudo mkdir /opt/mssql-tools/bin/sqlpackage/ && \
+    sudo mkdir /var/opt/mssql/data && \
     sudo locale-gen en_US.UTF-8 && sudo update-locale LANG=en_US.UTF-8
 
 # # Link provided on this page:
@@ -31,7 +31,8 @@ RUN sudo mkdir /opt/mssql-tools/bin/sqlpackage/ && \
 ADD https://download.microsoft.com/download/d/e/b/deb7b081-a3dc-47ea-8f2a-48cd8e486036/sqlpackage-linux-x64-en-US-15.0.4630.1.zip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip
 RUN sudo unzip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip -d /opt/mssql-tools/bin/sqlpackage/
 
-RUN sudo chmod u+rwx -R /opt/mssql-tools/bin/sqlpackage/sqlpackage
+RUN sudo chmod 777 -R /opt/mssql-tools/bin/sqlpackage  && \
+    sudo chmod 777 -R /var/opt/mssql/data
 ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage
 ENV PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools/bin/sqlpackage:/opt/mssql/bin
 
