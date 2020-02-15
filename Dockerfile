@@ -17,7 +17,7 @@ RUN sudo ACCEPT_EULA=Y apt-get install -fy curl \
     debconf-utils \
     msodbcsql \
     mssql-tools \
-    dotnet-runtime-2.2 \
+    dotnet-sdk-3.1 \
     locales \
     libunwind8 \
     libicu55 \
@@ -31,7 +31,7 @@ RUN sudo mkdir /opt/mssql-tools/bin/sqlpackage/ && \
 ADD https://download.microsoft.com/download/d/e/b/deb7b081-a3dc-47ea-8f2a-48cd8e486036/sqlpackage-linux-x64-en-US-15.0.4630.1.zip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip
 RUN sudo unzip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip -d /opt/mssql-tools/bin/sqlpackage/
 
-RUN sudo chmod a+x /opt/mssql-tools/bin/sqlpackage/sqlpackage
+RUN sudo chmod u+rwx -R /opt/mssql-tools/bin/sqlpackage/sqlpackage
 ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage
 ENV PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools/bin/sqlpackage:/opt/mssql/bin
 
