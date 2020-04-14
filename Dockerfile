@@ -7,19 +7,25 @@ RUN apt-get update && apt-get install -y sudo && \
     usermod -a -G root,sudo mssql && \
     echo "mssql ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
+RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb \
+    && sudo dpkg -i packages-microsoft-prod.deb \
+    && sudo apt-get install -y software-properties-common \
+    && sudo add-apt-repository universe \
+    && sudo apt-get update \
+    && sudo apt-get install -y apt-transport-https \
+    && sudo apt-get update \
+    && sudo apt-get install -y dotnet-sdk-3.1
+
 USER mssql
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
 RUN sudo ACCEPT_EULA=Y apt-get install -fy curl \
-    apt-transport-https \
     debconf-utils \
-    msodbcsql \
+    msodbcsql17 \
     mssql-tools \
-    dotnet-sdk-3.1 \
     locales \
     libunwind8 \
-    libicu55 \
     unzip
 
 RUN sudo mkdir /opt/mssql-tools/bin/sqlpackage/ && \
