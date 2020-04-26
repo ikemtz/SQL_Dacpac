@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server:latest
+FROM mcr.microsoft.com/mssql/server:2019-latest
 LABEL maintainer="Isaac Martinez"
 
 USER root
