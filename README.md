@@ -17,7 +17,7 @@ RUN sqlservr & sleep 20 \
     && pkill sqlservr && sleep 10 \
     && sudo rm -rf /dacpac
 
-FROM mcr.microsoft.com/mssql/server
+FROM mcr.microsoft.com/mssql/server:2019-latest
 LABEL author="@IkeMtz"
 ENV ACCEPT_EULA=Y
 ENV SA_PASSWORD=YOUR_DESIRED_PASSWORD
