@@ -14,7 +14,7 @@ RUN wget https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-p
     && sudo apt-get update \
     && sudo apt-get install -y apt-transport-https \
     && sudo apt-get update \
-    && sudo apt-get install -y dotnet-sdk-3.1
+    && sudo apt-get install -y dotnet-sdk-5.0
 
 USER mssql
 # apt-get and system utilities
