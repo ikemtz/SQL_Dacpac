@@ -1,6 +1,5 @@
 FROM mcr.microsoft.com/mssql/server:2019-latest
 LABEL maintainer="Isaac Martinez"
-ENV ACCEPT_EULA=Y
 USER root
 
 RUN usermod -a -G root,sudo mssql && \
@@ -20,7 +19,7 @@ RUN apt-get install -y dotnet-sdk-5.0
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
-RUN ACCEPT_EULA=Y apt-get install -fy curl \
+RUN apt-get install -fy curl \
     debconf-utils \
     msodbcsql17 \
     mssql-tools \
