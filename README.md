@@ -17,8 +17,7 @@ COPY /$NEW_DB_NAME.dacpac /dacpac/db.dacpac
 RUN sqlservr & sleep 20 \
     && sqlpackage /Action:Publish /TargetServerName:localhost /TargetUser:SA /TargetPassword:$SA_PASSWORD /SourceFile:/dacpac/db.dacpac /TargetDatabaseName:$NEW_DB_NAME /p:BlockOnPossibleDataLoss=false \
     && sleep 20 \
-    && pkill sqlservr && sleep 10 \
-    && sudo rm -rf /dacpac
+    && pkill sqlservr && sleep 10
 
 FROM mcr.microsoft.com/mssql/server:2019-latest
 LABEL author="@IkeMtz"
