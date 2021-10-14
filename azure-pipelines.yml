@@ -24,7 +24,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'IkeMtz Docker Hub'
-        repository: 'sql_dacpac'
+        repository: 'ikemtz/sql_dacpac'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: 'beta'
@@ -36,7 +36,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'IkeMtz Docker Hub'
-        repository: 'sql_dacpac'
+        repository: 'ikemtz/sql_dacpac'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
