@@ -19,7 +19,8 @@ RUN apt-get install -y dotnet-sdk-5.0
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
-RUN apt-get install -fy curl \
+RUN apt-get install -fy sudo \
+    curl \
     debconf-utils \
     msodbcsql17 \
     mssql-tools \
