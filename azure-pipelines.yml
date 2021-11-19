@@ -35,6 +35,7 @@ stages:
         dockerImageName: 'ikemtz/sql_dacpac:beta'
         dockerfilePath: 'Dockerfile'
         monitorWhen: 'always'
+        severityThreshold: 'critical'
         failOnIssues: true
         projectName: 'ikemtz/SQL_Dacpac'
     - task: Docker@2
