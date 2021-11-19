@@ -6,6 +6,7 @@ RUN usermod -a -G root,sudo mssql && \
     echo "mssql ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+RUN dpkg --purge packages-microsoft-prod && dpkg -i packages-microsoft-prod.deb
 RUN dpkg -i packages-microsoft-prod.deb
 RUN rm packages-microsoft-prod.deb
 
@@ -13,14 +14,13 @@ RUN apt-get update
 RUN apt-get install -y apt-transport-https
 
 RUN apt-get update
-RUN apt-get install -y aspnetcore-runtime-5.0
 RUN apt-get install -y dotnet-sdk-5.0
+RUN apt-get install -y dotnet-sdk-6.0
 
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
-RUN apt-get install -fy sudo \
-    curl \
+RUN apt-get install -fy curl \
     debconf-utils \
     msodbcsql17 \
     mssql-tools \
