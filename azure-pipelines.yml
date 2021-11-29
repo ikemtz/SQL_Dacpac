@@ -28,6 +28,16 @@ stages:
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: 'beta'
+    - task: SnykSecurityScan@1
+      inputs:
+        serviceConnectionEndpoint: 'synk'
+        testType: 'container'
+        dockerImageName: 'ikemtz/sql_dacpac:beta'
+        dockerfilePath: 'Dockerfile'
+        monitorWhen: 'always'
+        severityThreshold: 'critical'
+        failOnIssues: true
+        projectName: 'ikemtz/SQL_Dacpac'
     - task: Docker@2
       displayName: Test image
       inputs:
