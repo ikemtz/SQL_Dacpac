@@ -28,9 +28,6 @@ EXPOSE 1433
 COPY --from=sql-temp /var/opt/mssql/data/$NEW_DB_NAME*.mdf /var/opt/mssql/data/
 COPY --from=sql-temp /var/opt/mssql/data/$NEW_DB_NAME*.ldf /var/opt/mssql/data/
 
-USER root
-RUN chown -R mssql /var/opt/mssql/data
-USER mssql
 ```
 
 # SQL Dacpac
@@ -60,7 +57,4 @@ EXPOSE 1433
 COPY --from=sql-temp /var/opt/mssql/data/$NEW_DB_NAME*.mdf /var/opt/mssql/data/
 COPY --from=sql-temp /var/opt/mssql/data/$NEW_DB_NAME*.ldf /var/opt/mssql/data/
 
-USER root
-RUN chown -R mssql /var/opt/mssql/data
-USER mssql
 ```
