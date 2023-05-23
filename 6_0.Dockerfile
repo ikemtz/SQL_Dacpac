@@ -16,7 +16,7 @@ RUN apt-get update
 RUN apt-get install -y apt-transport-https
 
 RUN apt-get update
-RUN apt-get install -y dotnet-sdk-7.0
+RUN apt-get install -y dotnet-sdk-6.0
 
 # apt-get and system utilities
 # install SQL Server drivers and tools
