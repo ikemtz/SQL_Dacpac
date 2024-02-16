@@ -27,8 +27,6 @@ RUN apt-get install -fy curl \
     mssql-tools18 \
     locales \
     libunwind8 \
-    libicu66 \
-    libssl1.1 \
     libssl-dev \
     unzip
 
