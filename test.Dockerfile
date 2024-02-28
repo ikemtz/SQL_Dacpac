@@ -4,7 +4,15 @@ ENV SA_PASSWORD=SqlDockerRocks123! \
     NEW_DB_NAME=YOUR_NEW_DATABASE_NAME
 COPY *.dacpac /dacpac/
 RUN /opt/mssql/bin/sqlservr & sleep 20 \
-    && sqlpackage /Action:Publish /TargetServerName:localhost /TargetUser:sa /TargetPassword:$SA_PASSWORD /SourceFile:/dacpac/test.dacpac /TargetDatabaseName:$NEW_DB_NAME /p:BlockOnPossibleDataLoss=false \
+    && sqlpackage /Action:Publish \
+        /SourceTrustServerCertificate:true \
+        /TargetTrustServerCertificate:true \
+        /TargetServerName:localhost \
+        /TargetUser:sa \
+        /TargetPassword:$SA_PASSWORD \
+        /SourceFile:/dacpac/test.dacpac \
+        /TargetDatabaseName:$NEW_DB_NAME \
+        /p:BlockOnPossibleDataLoss=false \
     && sleep 20 \
     && pkill sqlservr && sleep 10
 
