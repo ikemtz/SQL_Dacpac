@@ -24,7 +24,7 @@ RUN usermod -a -G root,sudo mssql \
     && mkdir /home/mssql \
     && mkdir /home/mssql/.dotnet \
     && locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 \
-    && apt-get clean \
+    && apt-get clean
 # RUN  dotnet tool install -g microsoft.sqlpackage
 # # Link provided on this page:
 # # https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download?view=sql-server-ver16
