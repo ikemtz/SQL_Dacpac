@@ -38,7 +38,7 @@ RUN chmod 777 -R /opt/mssql-tools/bin/sqlpackage \
 ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage \
     PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools18/bin:opt/mssql-tools/bin/sqlpackage:/opt/mssql/bin
 RUN sqlpackage /version
-RUN dotnet /version
+RUN dotnet --info
 USER mssql
 RUN echo "$PATH" >> ~/.bashrc
 VOLUME /devvol
