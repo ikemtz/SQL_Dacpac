@@ -1,5 +1,5 @@
 FROM mcr.microsoft.com/mssql/server:2022-latest
-LABEL maintainer="@IkeMtz"
+LABEL maintainer="Isaac Martinez"
 USER root
 
 ENV ACCEPT_EULA=Y
@@ -7,24 +7,28 @@ ENV ACCEPT_EULA=Y
 RUN usermod -a -G root,sudo mssql \
     && echo "mssql ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
     && apt-get update \
-    && apt-get install -y dotnet-sdk-8.0 curl \
+    && apt-get install -y dotnet-sdk-7.0 curl \
+
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
         debconf-utils \
         msodbcsql18 \
         mssql-tools18 \
+        locales \
+        libunwind8 \
+        libssl-dev \
         unzip \
-    && mkdir -p /opt/mssql-tools/ \
-    && mkdir -p /var/opt/mssql/data/ \
-    && mkdir -p /opt/mssql-tools/bin/sqlpackage/ \
-    && mkdir -p /home/mssql/.dotnet \
-    && dotnet tool install -g microsoft.sqlpackage \
+    && mkdir /opt/mssql-tools/bin/sqlpackage/ \
+    && mkdir /var/opt/mssql/data \
+    && mkdir /home/mssql \
+    && mkdir /home/mssql/.dotnet \
+    && locale-gen en_US.UTF-8 && update-locale LANG=en_US.UTF-8 \
     && apt-get clean
-
+# RUN  dotnet tool install -g microsoft.sqlpackage
 # # Link provided on this page:
 # # https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download?view=sql-server-ver16
-ADD https://download.microsoft.com/download/1/3/3/133c0627-7e5a-420a-9a76-3203e9a2884c/sqlpackage-linux-x64-en-162.3.566.1.zip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip
+ADD https://download.microsoft.com/download/d/0/5/d05fd9de-4d32-48d4-9a6d-f089b0288eb6/sqlpackage-linux-x64-en-162.2.111.2.zip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip
 RUN unzip /opt/mssql-tools/bin/sqlpackage/sqlpackage.zip -d /opt/mssql-tools/bin/sqlpackage/
 
 RUN chmod 777 -R /opt/mssql-tools/bin/sqlpackage \
