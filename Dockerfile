@@ -7,14 +7,10 @@ ENV ACCEPT_EULA=Y
 RUN usermod -a -G root,sudo mssql \
     && echo "mssql ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
     && apt-get update \
-    && apt-get install -y dotnet-sdk-8.0 curl \
+    && apt-get install -y curl debconf-utils dotnet-sdk-9.0 msodbcsql18 mssql-tools18 unzip \
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
-        debconf-utils \
-        msodbcsql18 \
-        mssql-tools18 \
-        unzip \
     && mkdir -p /opt/mssql-tools/ \
     && mkdir -p /var/opt/mssql/data/ \
     && mkdir -p /opt/mssql-tools/bin/sqlpackage/ \
