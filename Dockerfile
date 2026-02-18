@@ -22,12 +22,12 @@ RUN usermod -a -G root,sudo mssql \
 # # https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download?view=sql-server-ver16
 
 ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage \
-    PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools18/bin:opt/mssql-tools/bin/sqlpackage:/opt/mssql/bin
+    PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools18/bin:/opt/mssql/bin
 
 RUN chmod 777 -R /opt/mssql-tools/bin/sqlpackage \
     && chmod 777 -R /var/opt/mssql/data \
     && chmod 777 -R /home/mssql \
-    && chmod a+x opt/mssql-tools/bin/sqlpackage/sqlpackage \
+    && chmod a+x /opt/mssql-tools/bin/sqlpackage/sqlpackage \
     && sqlpackage /version \
     && dotnet --info
 USER mssql
