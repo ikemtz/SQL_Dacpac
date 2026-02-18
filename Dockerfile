@@ -27,7 +27,6 @@ ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage \
 RUN chmod 777 -R /opt/mssql-tools/bin/sqlpackage \
     && chmod 777 -R /var/opt/mssql/data \
     && chmod 777 -R /home/mssql \
-    && chmod a+x /opt/mssql-tools/bin/sqlpackage/sqlpackage \
     && sqlpackage /version \
     && dotnet --info
 USER mssql
