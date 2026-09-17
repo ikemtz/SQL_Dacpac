@@ -22,5 +22,4 @@ RUN chmod 777 -R /var/opt/mssql/data \
     && chmod 777 -R /root/.dotnet/tools \
     && chmod 777 -R /home/mssql \
     && dotnet --info
-
 VOLUME /devvol
