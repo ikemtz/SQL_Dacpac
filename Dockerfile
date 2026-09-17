@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/mssql/server:2025-latest
+FROM mcr.microsoft.com/mssql/server:latest
 LABEL maintainer="@IkeMtz"
 USER root
 
@@ -11,24 +11,16 @@ RUN usermod -a -G root,sudo mssql \
 # apt-get and system utilities
 # install SQL Server drivers and tools
 # dotnet core
-    && mkdir -p /opt/mssql-tools/ \
     && mkdir -p /var/opt/mssql/data/ \
-    && mkdir -p /opt/mssql-tools/bin/sqlpackage/ \
     && mkdir -p /home/mssql/.dotnet \
-    && dotnet tool install -g microsoft.sqlpackage \
+    && dotnet tool install -g microsoft.sqlpackage --allow-roll-forward \
     && apt-get clean
 
-# # Link provided on this page:
-# # https://docs.microsoft.com/en-us/sql/tools/sqlpackage-download?view=sql-server-ver16
+ENV PATH=$PATH:/opt/mssql-tools18/bin:/opt/mssql/bin:/root/.dotnet/tools
 
-ENV sqlpackage=/opt/mssql-tools/bin/sqlpackage/sqlpackage \
-    PATH=$PATH:/opt/mssql-tools/bin:/opt/mssql-tools18/bin:/opt/mssql/bin
-
-RUN chmod 777 -R /opt/mssql-tools/bin/sqlpackage \
-    && chmod 777 -R /var/opt/mssql/data \
+RUN chmod 777 -R /var/opt/mssql/data \
+    && chmod 777 -R /root/.dotnet/tools \
     && chmod 777 -R /home/mssql \
-    && sqlpackage /version \
     && dotnet --info
-USER mssql
-RUN echo "$PATH" >> ~/.bashrc
+
 VOLUME /devvol
